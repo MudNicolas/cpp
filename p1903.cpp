@@ -57,7 +57,7 @@ int main()
 {
     n = read(), m = read();
     block_size = pow(n, 2.0 / 3.0); // 设定块大小为n^(2/3)
-    block_num = ceil((double)n / block_size); // ceil向上取整，此处把末尾零散块自成一整块
+    block_num = ceil((double)n / block_size); // ceil向上取整，才能让block_size*block_num的belong覆盖所有元素
     for (int i = 1; i <= block_num; ++i)
         for (int j = (i - 1) * block_size + 1; j <= i * block_size; ++j)
             belong[j] = i;

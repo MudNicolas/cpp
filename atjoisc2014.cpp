@@ -30,14 +30,16 @@ int main()
     n = read(), m = read();
     // 分块初始化
     block_size = sqrt(n);
-    block_num = ceil((double)n / block_size);
+    block_num = floor((double)n / block_size);
     for (int i = 1; i <= block_num; ++i) {
         st[i] = block_size * (i - 1) + 1;
         ed[i] = block_size * i;
-        for (int j = st[i]; j <= ed[i]; ++j)
-            belong[j] = i;
     }
     ed[block_num] = n;
+
+    for (int i = 1; i <= block_num; ++i)
+        for (int j = st[i]; j <= ed[i]; ++j)
+            belong[j] = i;
 
     // 数据离散化
     for (int i = 1; i <= n; ++i)
@@ -60,7 +62,7 @@ int main()
         int l = ed[k] + 1, r = ed[k]; // lr初始化
         ll now = 0; // 每块答案初始化
         memset(cnt, 0, sizeof(cnt)); // 每块统计初始化
-        for (; belong[q[i].l] == k; ++i) { // 遍历左端点属于k块的询问
+        for (; belong[q[i].l] == k; ++i) { // 遍历左端点属于k块的询问，q是根据左端点的块排过序的
             int ql = q[i].l, qr = q[i].r;
             ll tmp;
             if (belong[ql] == belong[qr]) { // 同块直接暴力
