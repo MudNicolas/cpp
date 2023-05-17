@@ -30,7 +30,7 @@ int main()
     n = read(), m = read();
     // 分块初始化
     block_size = sqrt(n);
-    block_num = floor((double)n / block_size);
+    block_num = n / block_size;
     for (int i = 1; i <= block_num; ++i) {
         st[i] = block_size * (i - 1) + 1;
         ed[i] = block_size * i;
